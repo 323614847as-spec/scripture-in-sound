@@ -1,0 +1,7 @@
+.next
+node_modules
+.env*
+.vercel
+*.log
+*.swp
+.DS_Store
