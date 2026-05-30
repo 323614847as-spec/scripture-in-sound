@@ -1,12 +1,25 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
+import { siteConfig } from "../lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Scripture in Sound",
+  metadataBase: new URL(siteConfig.currentUrl),
+  title: siteConfig.siteName,
   description:
     "A student-curated guide to Buddhist scriptures, chanting, pronunciation practice, meditation, and reflection.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: siteConfig.siteName,
+    description:
+      "A student-curated guide to Buddhist scriptures, chanting, pronunciation practice, meditation, and reflection.",
+    url: siteConfig.currentUrl,
+    siteName: siteConfig.siteName,
+    type: "website",
+  },
 };
 
 const navItems = [
@@ -27,7 +40,7 @@ export default function RootLayout({
           <header className="border-b border-[#eadfc8] bg-[#fbf7ef]/90">
             <nav className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
               <Link href="/" className="text-xl font-semibold tracking-wide">
-                Scripture in Sound
+                {siteConfig.siteName}
               </Link>
               <div className="font-sans-soft flex flex-wrap gap-2 text-sm text-[#725f50]">
                 {navItems.map((item) => (
@@ -47,6 +60,7 @@ export default function RootLayout({
             <p>Created as a student learning project for mindful study and reflection.</p>
           </footer>
         </div>
+        {/* Disable this Analytics component if it causes access issues in some regions. */}
         <Analytics />
       </body>
     </html>

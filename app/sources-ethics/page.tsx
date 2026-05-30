@@ -24,8 +24,8 @@ const sections = [
     text: "The project should quote only short excerpts when allowed, link to sources when possible, and include attribution for translations, recordings, images, and course inspiration.",
   },
   {
-    title: "Privacy Note",
-    text: "This website uses privacy-friendly analytics to understand aggregate page views. It does not attempt to identify individual visitors.",
+    title: "Privacy and Analytics",
+    text: "This website may use privacy-friendly analytics to understand aggregate page views. Analytics can be disabled if it causes access issues in some regions. It does not attempt to identify individual visitors.",
   },
 ];
 
