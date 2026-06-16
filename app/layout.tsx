@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.currentUrl),
   title: siteConfig.siteName,
   description:
-    "A student-curated guide to Buddhist scriptures, chanting, pronunciation practice, meditation, and reflection.",
+    "A curated guide to Buddhist scripture, chanting, sound practice, and contemplative listening.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: siteConfig.siteName,
     description:
-      "A student-curated guide to Buddhist scriptures, chanting, pronunciation practice, meditation, and reflection.",
+      "A curated guide to Buddhist scripture, chanting, sound practice, and contemplative listening.",
     url: siteConfig.currentUrl,
     siteName: siteConfig.siteName,
     type: "website",
@@ -57,7 +57,7 @@ export default function RootLayout({
           </header>
           {children}
           <footer className="border-t border-[#eadfc8] px-5 py-8 text-center text-sm text-[#725f50]">
-            <p>Created as a student learning project for mindful study and reflection.</p>
+            <p>Created as a public humanities project for mindful study and reflection.</p>
           </footer>
         </div>
         {/* Disable this Analytics component if it causes access issues in some regions. */}

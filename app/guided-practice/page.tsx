@@ -1,10 +1,40 @@
 const concepts = [
-  ["Buddha", "The awakened one; also a reminder of the possibility of awakening."],
-  ["Dharma", "The teachings, truth, and path that guide practice."],
-  ["Saṅgha", "The community of practitioners who support the path."],
-  ["Mantra", "A repeated sacred phrase used to focus attention and devotion."],
-  ["Chanting", "Vocal repetition that can join text, breath, rhythm, and memory."],
-  ["Meditation", "A practice of steady attention, insight, and compassionate awareness."],
+  [
+    "Buddha",
+    "The Buddha means “the awakened one.” In this project, the term also points to the possibility of attention becoming clearer through practice, listening, and reflection.",
+  ],
+  [
+    "Dharma",
+    "Dharma refers to the Buddha’s teaching, the path of practice, and the truth that practice helps reveal. Scripture becomes part of Dharma when it is studied, spoken, remembered, and lived.",
+  ],
+  [
+    "Saṅgha",
+    "Saṅgha means the community of practitioners. Chanting often makes this communal dimension visible because individual voices join into a shared rhythm.",
+  ],
+  [
+    "Scripture",
+    "Scripture is not only written text. In Buddhist traditions, scripture can be copied, memorized, recited, heard, and practiced as part of religious life.",
+  ],
+  [
+    "Mantra",
+    "A mantra is a repeated sacred phrase used to focus attention and devotion. Its meaning comes not only from translation, but also from rhythm, memory, breath, and repetition.",
+  ],
+  [
+    "Chanting",
+    "Chanting turns scripture into sound. It allows a text to be experienced through voice, pace, pause, and bodily attention rather than silent reading alone.",
+  ],
+  [
+    "Recitation",
+    "Recitation means speaking a text repeatedly and attentively. It connects language with rhythm and memory, making scripture easier to internalize.",
+  ],
+  [
+    "Listening",
+    "Listening is an active form of practice. Instead of only understanding words intellectually, the listener notices tone, silence, repetition, and attention.",
+  ],
+  [
+    "Meditation",
+    "Meditation is a practice of steady attention and awareness. In this site, sound is treated as one possible support for attention, especially for beginners learning to listen carefully.",
+  ],
 ];
 
 const phrases = [
@@ -78,8 +108,9 @@ export default function GuidedPractice() {
           Listen, repeat, reflect.
         </h1>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-[#5f4a3b]">
-          This page introduces basic Buddhist terms, short pronunciation practice,
-          and simple meditation prompts for beginners.
+          This page introduces key Buddhist terms through sound, repetition, and
+          beginner-level reflection. It is designed for educational use and does
+          not replace formal instruction from Buddhist teachers or communities.
         </p>
       </section>
 
@@ -100,8 +131,9 @@ export default function GuidedPractice() {
           <div>
             <h2 className="text-3xl font-semibold">Listen & Repeat</h2>
             <p className="font-sans-soft mt-3 max-w-2xl text-sm leading-6 text-[#725f50]">
-              AI-generated pronunciation demos are for educational use only. They are
-              not traditional monastic chants or ritual performances.
+              Audio examples are being added gradually. AI-generated pronunciation
+              demos will be clearly labeled and will not be presented as traditional
+              monastic chanting.
             </p>
           </div>
         </div>

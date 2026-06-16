@@ -25,23 +25,23 @@ export default function Home() {
       <section className="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-[1.15fr_0.85fr] md:items-center md:py-24">
         <div>
           <p className="font-sans-soft mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#b38b3f]">
-            A Student-Curated Guide
+            Scripture, Chanting, and Contemplative Listening
           </p>
           <h1 className="max-w-3xl text-5xl font-semibold leading-tight text-[#2f2118] sm:text-6xl">
             Scripture in Sound
           </h1>
           <p className="mt-5 max-w-2xl text-2xl leading-snug text-[#5f4a3b]">
-            A Student-Curated Guide to Buddhist Scriptures, Chanting, and Meditation
+            A Curated Guide to Buddhist Scripture, Chanting, and Contemplative Practice
           </p>
           <p className="mt-8 max-w-2xl text-lg leading-8 text-[#4b392d]">
-            Inspired by HarvardX&apos;s Buddhism Through Its Scriptures, this project
-            explores how Buddhist scriptures become meaningful through reading,
-            chanting, pronunciation practice, meditation, and reflection.
+            Inspired by <em>HarvardX&apos;s Buddhism Through Its Scriptures</em>, this
+            project explores how Buddhist scripture becomes meaningful when it is
+            read aloud, repeated, and practiced through sound.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link
               href="/guided-practice"
-              className="font-sans-soft rounded-full bg-[#2f2118] px-5 py-3 text-sm font-semibold text-[#fffdf8] transition hover:bg-[#4b392d]"
+              className="font-sans-soft rounded-full border border-[#B8893A] bg-[#B8893A] px-5 py-3 text-sm font-semibold text-[#FFF8EF] transition hover:border-[#8A6428] hover:bg-[#8A6428]"
             >
               Start Guided Practice
             </Link>

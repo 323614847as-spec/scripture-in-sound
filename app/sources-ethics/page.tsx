@@ -9,7 +9,7 @@ const sections = [
   },
   {
     title: "Audio Sources",
-    text: "Audio examples should be credited clearly. Traditional chants, temple recordings, teacher recordings, and student-created demos should not be mixed together without explanation.",
+    text: "Audio examples should be credited clearly. Traditional chants, temple recordings, teacher recordings, and educational demos should not be mixed together without explanation.",
   },
   {
     title: "AI Use Statement",
