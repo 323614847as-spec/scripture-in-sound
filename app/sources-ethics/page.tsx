@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sources & Ethics",
+  description:
+    "Learn about the sources, attribution, educational purpose, and ethical approach behind Scripture in Sound.",
+  alternates: {
+    canonical: "/sources-ethics",
+  },
+};
+
 const sections = [
   {
     title: "Course Inspiration",

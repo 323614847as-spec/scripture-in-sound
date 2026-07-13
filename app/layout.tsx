@@ -6,12 +6,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.currentUrl),
-  title: siteConfig.siteName,
+  title: {
+    default: siteConfig.siteName,
+    template: `%s | ${siteConfig.siteName}`,
+  },
   description:
     "A curated guide to Buddhist scripture, chanting, sound practice, and contemplative listening.",
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     title: siteConfig.siteName,
     description:
@@ -20,6 +20,14 @@ export const metadata: Metadata = {
     siteName: siteConfig.siteName,
     type: "website",
   },
+};
+
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.siteName,
+  alternateName: "Scripture in Sound",
+  url: siteConfig.currentUrl,
 };
 
 const navItems = [
@@ -36,6 +44,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
+        />
         <div className="min-h-screen">
           <header className="border-b border-[#eadfc8] bg-[#fbf7ef]/90">
             <nav className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between">

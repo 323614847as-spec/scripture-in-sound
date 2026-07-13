@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Guided Practice",
+  description:
+    "Explore Buddhist scripture, chanting, pronunciation, listening, and contemplative practice.",
+  alternates: {
+    canonical: "/guided-practice",
+  },
+};
+
 const concepts = [
   [
     "Buddha",
