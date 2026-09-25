@@ -7,6 +7,7 @@ export const practices: Practice[] = [
     title: "Breathing with the Heart Sutra",
     durationMinutes: 5,
     type: "Contemporary contemplative listening exercise",
+    historicalStatus: "modern",
     description:
       "A short listening pause that uses breath and a neutral sound as supports for attention.",
     instructions: [
@@ -19,6 +20,7 @@ export const practices: Practice[] = [
       "This is a modern educational exercise created for this project. It is not presented as a traditional or historically authoritative Buddhist ritual.",
     audioId: "interface-tone",
     relatedScriptureIds: ["heart-sutra"],
+    relatedPlaceIds: ["rongwo-monastery"],
     status: "published",
   },
   {
@@ -27,6 +29,7 @@ export const practices: Practice[] = [
     title: "Silent Listening",
     durationMinutes: 3,
     type: "Contemporary contemplative listening exercise",
+    historicalStatus: "modern",
     description: "Attend to near and distant sounds without naming or pursuing them.",
     instructions: ["Settle into stillness.", "Notice the nearest sound.", "Expand attention to the whole field of sound."],
     editorialNote:
@@ -39,6 +42,7 @@ export const practices: Practice[] = [
     title: "Reflection on Impermanence",
     durationMinutes: 10,
     type: "Contemporary guided reflection",
+    historicalStatus: "placeholder",
     description: "A future guided session focused on how sounds arise, change, and pass.",
     instructions: ["Guidance script to be reviewed and added."],
     editorialNote:
@@ -51,6 +55,7 @@ export const practices: Practice[] = [
     title: "Listening and Compassion",
     durationMinutes: 15,
     type: "Contemporary guided reflection",
+    historicalStatus: "placeholder",
     description: "A future session to accompany verified study material on compassion.",
     instructions: ["Guidance and source context to be added."],
     editorialNote: "Placeholder awaiting editorial and scholarly review.",
@@ -58,6 +63,6 @@ export const practices: Practice[] = [
   },
 ];
 
-export function getPractice(slug: string) {
-  return practices.find((practice) => practice.slug === slug);
+export function getPractice(slugOrId: string) {
+  return practices.find((practice) => practice.slug === slugOrId || practice.id === slugOrId);
 }

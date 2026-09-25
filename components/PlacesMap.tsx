@@ -34,15 +34,13 @@ export function PlacesMap({ places }: { places: Place[] }) {
       </div>
       {activePlace ? (
         <aside className="map-preview" aria-live="polite">
-          <div className="image-placeholder image-placeholder--map">
-            <span>Field photograph forthcoming</span>
-          </div>
+          {activePlace.coverImage ? <img className="map-preview__image" src={activePlace.coverImage.src} alt={activePlace.coverImage.alt} /> : <div className="image-placeholder image-placeholder--map"><span>[COVER PHOTOGRAPH TO BE ADDED BY AUTHOR]</span></div>}
           <p className="eyebrow">{activePlace.location}</p>
           <h3>{activePlace.name}</h3>
           <p className="map-preview__local">{activePlace.localName}</p>
-          <p>{activePlace.summary}</p>
+          <p>{activePlace.shortDescription}</p>
           <div className="map-preview__footer">
-            <span>{activePlace.tradition}</span>
+            <span>{activePlace.traditions.join(" · ")}</span>
             <Link className="text-link" href={`/places/${activePlace.slug}`}>Explore this place →</Link>
           </div>
         </aside>

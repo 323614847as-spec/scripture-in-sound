@@ -7,6 +7,7 @@ const navItems = [
   { href: "/listen", label: "Listen" },
   { href: "/practice", label: "Practice" },
   { href: "/places", label: "Sacred Places" },
+  { href: "/guide", label: "Guide" },
   { href: "/about", label: "About" },
 ];
 

@@ -1,72 +1,16 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Sources & Ethics",
-  description:
-    "Learn about the sources, attribution, educational purpose, and ethical approach behind Scripture in Sound.",
-  alternates: {
-    canonical: "/sources-ethics",
-  },
-};
+export const metadata: Metadata = { title: "Sources & Ethics", description: "The sourcing, attribution, rights, and ethical framework for Scripture in Sound.", alternates: { canonical: "/sources-ethics" } };
 
-const sections = [
-  {
-    title: "Course Inspiration",
-    text: "This project is inspired by HarvardX's Buddhism Through Its Scriptures and its attention to how Buddhist texts are read, practiced, interpreted, and lived.",
-  },
-  {
-    title: "Text Sources",
-    text: "Text examples should come from reliable translations, public domain sources, libraries, course materials, or sources with clear permission for educational use.",
-  },
-  {
-    title: "Audio Sources",
-    text: "Audio examples should be credited clearly. Traditional chants, temple recordings, teacher recordings, and educational demos should not be mixed together without explanation.",
-  },
-  {
-    title: "AI Use Statement",
-    text: "AI may be used to create draft explanations, pronunciation demos, and study prompts. AI output should be checked against trusted sources before being presented as factual or traditional.",
-  },
-  {
-    title: "Educational Disclaimer",
-    text: "This website is a beginner educational project. It is not a substitute for learning from Buddhist teachers, communities, monastics, or tradition-specific practice settings.",
-  },
-  {
-    title: "Copyright and Attribution Policy",
-    text: "The project should quote only short excerpts when allowed, link to sources when possible, and include attribution for translations, recordings, images, and course inspiration.",
-  },
-  {
-    title: "Privacy and Analytics",
-    text: "This website may use privacy-friendly analytics to understand aggregate page views. Analytics can be disabled if it causes access issues in some regions. It does not attempt to identify individual visitors.",
-  },
+const principles = [
+  ["Scholarly care", "Historical claims, dates, translations, quotations, and doctrinal explanations require reviewed sources. Unverified material remains visibly marked."],
+  ["Living traditions", "Texts, chants, objects, and practices belong to living communities. The archive avoids presenting one context as universal or flattening differences between traditions."],
+  ["Sound in context", "Every published recording should identify its type, language, performer or recordist, place and date where appropriate, permission status, and relationship to a tradition."],
+  ["Fieldwork honesty", "First-person observations are written only by the author. Missing field notes remain explicit placeholders; the interface does not invent experience."],
+  ["Photographic attribution", "Original fieldwork images are distinguished from third-party material. Each image record supports credit, caption, date, location, notes, and rights status."],
+  ["Modern practice labels", "Contemporary exercises created for this site are clearly separated from historically situated or lineage-specific Buddhist practices."],
 ];
 
-export default function SourcesEthics() {
-  return (
-    <main className="mx-auto max-w-5xl px-5 py-12">
-      <section>
-        <p className="font-sans-soft text-sm font-semibold uppercase tracking-[0.18em] text-[#b38b3f]">
-          Sources & Ethics
-        </p>
-        <h1 className="mt-3 text-4xl font-semibold text-[#2f2118] sm:text-5xl">
-          Careful sources, respectful use.
-        </h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-[#5f4a3b]">
-          Buddhist scriptures, chants, and practices belong to living traditions.
-          This project should be clear about what is educational, what is sourced,
-          and what should be approached with humility.
-        </p>
-      </section>
-
-      <section className="mt-10 grid gap-5">
-        {sections.map((section) => (
-          <article key={section.title} className="rounded-lg border border-[#eadfc8] bg-[#fffdf8] p-6 shadow-sm">
-            <h2 className="text-2xl font-semibold">{section.title}</h2>
-            <p className="font-sans-soft mt-3 text-sm leading-7 text-[#725f50]">
-              {section.text}
-            </p>
-          </article>
-        ))}
-      </section>
-    </main>
-  );
+export default function SourcesEthicsPage() {
+  return <main id="main-content"><header className="page-hero page-shell"><p className="eyebrow">Sources & ethics</p><h1>Careful sources, visible limits.</h1><p>Scripture in Sound treats attribution, context, permissions, and uncertainty as part of the public-facing archive rather than as hidden production notes.</p></header><section className="page-shell ethics-grid">{principles.map(([title, text], index) => <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><h2>{title}</h2><p>{text}</p></article>)}</section><section className="page-section page-section--mist"><div className="page-shell source-schema"><div><p className="eyebrow">Source infrastructure</p><h2>What each record can hold</h2></div><dl><div><dt>Textual source</dt><dd>Title, author, translator, publication, URL, access date, notes, and rights status.</dd></div><div><dt>Recording</dt><dd>Title, language, tradition, recording type, attribution, transcript, context, and permission or license.</dd></div><div><dt>Photograph</dt><dd>File path, alt text, caption, date, location, field note, photographer credit, and rights status.</dd></div><div><dt>Original material</dt><dd>May be labeled “Photograph by the author” or “Field recording by the author” only after the author confirms the record.</dd></div></dl></div></section></main>;
 }

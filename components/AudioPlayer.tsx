@@ -47,6 +47,7 @@ export function AudioPlayer({ recording }: { recording: AudioRecording }) {
             <span>{recording.type}</span>
             <span aria-hidden="true">·</span>
             <span>{recording.language}</span>
+            {recording.traditions?.length ? <><span aria-hidden="true">·</span><span>{recording.traditions.join(" / ")}</span></> : null}
           </div>
           <h3>{recording.title}</h3>
         </div>
@@ -54,6 +55,7 @@ export function AudioPlayer({ recording }: { recording: AudioRecording }) {
       </div>
 
       <p className="audio-player__description">{recording.description}</p>
+      {recording.attribution || recording.rights ? <div className="audio-player__credit">{recording.attribution ? <span>{recording.attribution}</span> : null}{recording.rights ? <small>{recording.rights}</small> : null}</div> : null}
 
       {recording.src ? (
         <>

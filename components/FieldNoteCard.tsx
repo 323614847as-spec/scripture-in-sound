@@ -1,4 +1,5 @@
 import type { FieldNote } from "../types/content";
+import Link from "next/link";
 import { StatusLabel } from "./StatusLabel";
 
 export function FieldNoteCard({ note }: { note: FieldNote }) {
@@ -9,10 +10,11 @@ export function FieldNoteCard({ note }: { note: FieldNote }) {
         <StatusLabel status={note.status} />
       </div>
       <h3>{note.title}</h3>
-      <p>{note.text}</p>
+      <p>{note.body}</p>
       <div className="tag-list" aria-label="Field note tags">
         {note.tags.map((tag) => <span key={tag}>{tag}</span>)}
       </div>
+      <Link className="text-link" href={`/field-notes/${note.slug}`}>Open field note →</Link>
     </article>
   );
 }

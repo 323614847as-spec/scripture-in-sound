@@ -11,10 +11,10 @@ import { places } from "../data/places";
 export const metadata: Metadata = { title: "Scripture in Sound", alternates: { canonical: "/" } };
 
 const pathways = [
-  { number: "01", title: "Explore Scriptures", text: "Read texts alongside editorial context and listening resources.", href: "/scriptures" },
-  { number: "02", title: "Begin Listening", text: "Hear how language, breath, pacing, and repetition shape meaning.", href: "/listen" },
-  { number: "03", title: "Practice", text: "Enter clearly labeled contemporary contemplative listening sessions.", href: "/practice" },
-  { number: "04", title: "Explore Sacred Places", text: "Follow sound, field notes, and textual connections across place.", href: "/places" },
+  { number: "01", title: "Scripture", text: "Read texts, translations, histories, and interpretations.", href: "/scriptures" },
+  { number: "02", title: "Sound", text: "Hear Buddhist texts through chanting, recitation, pronunciation, and field recordings.", href: "/listen" },
+  { number: "03", title: "Practice", text: "Explore contemplative listening and guided practices.", href: "/practice" },
+  { number: "04", title: "Place", text: "Explore monasteries, temples, photographs, recordings, and observations.", href: "/places" },
 ];
 
 export default function Home() {
@@ -31,15 +31,10 @@ export default function Home() {
           <h1>Buddhist texts are not only read.</h1>
           <p className="hero__statement">They are heard, repeated, remembered, and lived.</p>
           <p className="hero__intro">Explore Buddhist scripture through text, sound, contemplative practice, and place.</p>
-          <div className="hero__actions">
-            <Link className="button button--primary" href="/scriptures">Enter the archive</Link>
-            <Link className="button button--text" href="/about">About the project →</Link>
-          </div>
         </div>
-        <div className="hero__sequence" aria-label="Project themes">
-          {[["01", "Scripture"], ["02", "Sound"], ["03", "Practice"], ["04", "Place"]].map(([number, label]) => (
-            <div key={number}><span>{number}</span><strong>{label}</strong></div>
-          ))}
+        <div className="hero__destinations" aria-label="Primary destinations">
+          <Link href="/scriptures"><span className="eyebrow">Textual archive</span><strong>Explore the Archive <i aria-hidden="true">→</i></strong><p>Read Buddhist texts, translations, histories, and interpretations.</p></Link>
+          <Link href="/places"><span className="eyebrow">Fieldwork archive</span><strong>Explore Sacred Places <i aria-hidden="true">→</i></strong><p>Explore monasteries, photographs, field recordings, and field notes.</p></Link>
         </div>
       </section>
 
@@ -56,9 +51,9 @@ export default function Home() {
         <div className="featured-scripture">
           <div className="featured-scripture__title">
             <p>{featuredScripture.originalTitle}</p>
-            <div className="tag-list"><span>{featuredScripture.tradition}</span>{featuredScripture.themes.map((theme) => <span key={theme}>{theme}</span>)}</div>
+            <div className="tag-list"><span>{featuredScripture.traditions.join(" · ")}</span>{featuredScripture.themes.map((theme) => <span key={theme}>{theme}</span>)}</div>
           </div>
-          <div><p className="large-copy">{featuredScripture.summary}</p><Link className="text-link" href={`/scriptures/${featuredScripture.slug}`}>Read the prototype entry →</Link></div>
+          <div><p className="large-copy">{featuredScripture.shortDescription}</p><Link className="text-link" href={`/scriptures/${featuredScripture.slug}`}>Read the prototype entry →</Link></div>
         </div>
       </section>
 
