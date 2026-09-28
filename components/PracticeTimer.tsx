@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRef } from "react";
 import type { Practice } from "../types/content";
+import { recordImpactEvent } from "./ImpactTracker";
 
 function displayTime(seconds: number) {
   return `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60).toString().padStart(2, "0")}`;
@@ -11,6 +13,7 @@ export function PracticeTimer({ practice }: { practice: Practice }) {
   const totalSeconds = practice.durationMinutes * 60;
   const [remaining, setRemaining] = useState(totalSeconds);
   const [running, setRunning] = useState(false);
+  const recordedStart = useRef(false);
 
   useEffect(() => {
     if (!running || remaining <= 0) return;
@@ -31,10 +34,10 @@ export function PracticeTimer({ practice }: { practice: Practice }) {
         <small>remaining</small>
       </div>
       <div className="practice-timer__actions">
-        <button className="button button--primary" type="button" onClick={() => setRunning((value) => !value)}>
+        <button className="button button--primary" type="button" onClick={() => { if (!recordedStart.current && remaining === totalSeconds) { recordImpactEvent("practice_start", practice.id); recordedStart.current = true; } setRunning((value) => !value); }}>
           {running ? "Pause session" : remaining === totalSeconds ? "Begin session" : "Resume session"}
         </button>
-        <button className="button button--quiet" type="button" onClick={() => { setRemaining(totalSeconds); setRunning(false); }}>
+        <button className="button button--quiet" type="button" onClick={() => { setRemaining(totalSeconds); setRunning(false); recordedStart.current = false; }}>
           Reset
         </button>
       </div>

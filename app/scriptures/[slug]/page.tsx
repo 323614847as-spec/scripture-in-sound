@@ -4,6 +4,9 @@ import { notFound } from "next/navigation";
 import { AudioPlayer } from "../../../components/AudioPlayer";
 import { RelatedContent, type RelatedItem } from "../../../components/RelatedContent";
 import { StatusLabel } from "../../../components/StatusLabel";
+import { CommunityDiscussionPanel } from "../../../components/CommunityDiscussionPanel";
+import { ImpactTracker } from "../../../components/ImpactTracker";
+import { SaveContentButton } from "../../../components/SaveContentButton";
 import { getPractice } from "../../../data/practices";
 import { getRecording } from "../../../data/recordings";
 import { getScripture, scriptures } from "../../../data/scriptures";
@@ -33,7 +36,7 @@ export default async function ScripturePage({ params }: { params: Promise<{ slug
   return (
     <main id="main-content">
       <header className="entry-hero page-shell">
-        <div><Link className="back-link" href="/scriptures">← All scriptures</Link><p className="eyebrow">{scripture.traditions.join(" · ")}</p><h1>{scripture.title}</h1><p className="entry-hero__original">{scripture.originalTitle}</p></div>
+        <div><Link className="back-link" href="/scriptures">← All scriptures</Link><p className="eyebrow">{scripture.traditions.join(" · ")}</p><h1>{scripture.title}</h1><p className="entry-hero__original">{scripture.originalTitle}</p><SaveContentButton type="scripture" id={scripture.id} returnPath={`/scriptures/${scripture.slug}`} /></div>
         <div className="entry-hero__meta"><StatusLabel status={scripture.status} /><dl><div><dt>Text type</dt><dd>{scripture.textType}</dd></div><div><dt>Themes</dt><dd>{scripture.themes.join(", ")}</dd></div><div><dt>Languages</dt><dd>{scripture.languages.join(", ")}</dd></div><div><dt>Context</dt><dd>{scripture.teachingMode ? `${scripture.teachingMode} — historically contextual` : "Not assigned"}</dd></div></dl></div>
       </header>
       <div className="longform page-shell">
@@ -47,7 +50,9 @@ export default async function ScripturePage({ params }: { params: Promise<{ slug
         <EntrySection number="08" title="How to listen"><ol>{(scripture.howToListen || []).map((item) => <li key={item}>{item}</li>)}</ol></EntrySection>
         <EntrySection number="09" title="Sources & further reading"><div className="stack">{scripture.sources.map((source) => <div className="source-record" key={source.id}><strong>{source.title}</strong>{source.author ? <p>Author: {source.author}</p> : null}{source.translator ? <p>Translator: {source.translator}</p> : null}{source.publication ? <p>{source.publication}</p> : null}{source.rights ? <small>{source.rights}</small> : null}</div>)}</div></EntrySection>
         <RelatedContent items={relatedItems} />
+        <CommunityDiscussionPanel type="scripture" id={scripture.id} label="this text" />
       </div>
+      <ImpactTracker eventType="scripture_view" contentId={scripture.id} />
     </main>
   );
 }

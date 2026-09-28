@@ -1,10 +1,11 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { updateSession } from "./lib/supabase/proxy";
 
 const legacyHost = "scripture-in-sound.vercel.app";
 const canonicalHost = "www.scriptureinsound.com";
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const host = request.headers.get("host")?.split(":")[0].toLowerCase();
 
   if (host === legacyHost) {
@@ -14,7 +15,7 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url, 308);
   }
 
-  return NextResponse.next();
+  return updateSession(request);
 }
 
 export const config = {

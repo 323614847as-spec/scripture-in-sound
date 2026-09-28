@@ -81,3 +81,7 @@ The current `lint` command performs a strict TypeScript check. The production bu
 ## Deployment
 
 The production site is published by Vercel from the connected GitHub repository and uses `https://www.scriptureinsound.com` as its canonical URL.
+
+## Community accounts and database
+
+Authentication, public profiles, discussions, replies, moderation, saved content, and aggregate impact events use Supabase. The complete schema and Row Level Security policies are in `supabase/migrations/202609280001_community.sql`. Setup instructions are in `supabase/README.md`; do not add a Supabase secret/service-role key to this website.

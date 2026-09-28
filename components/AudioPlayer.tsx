@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { AudioRecording } from "../types/content";
 import { StatusLabel } from "./StatusLabel";
+import { recordImpactEvent } from "./ImpactTracker";
+import { ClientSaveButton } from "./ClientSaveButton";
 
 function formatTime(seconds: number) {
   if (!Number.isFinite(seconds)) return "0:00";
@@ -32,6 +34,7 @@ export function AudioPlayer({ recording }: { recording: AudioRecording }) {
     if (!audio || !recording.src) return;
     if (audio.paused) {
       await audio.play();
+      if (audio.currentTime < 0.25) recordImpactEvent("audio_play", recording.id);
       setPlaying(true);
     } else {
       audio.pause();
@@ -56,6 +59,7 @@ export function AudioPlayer({ recording }: { recording: AudioRecording }) {
 
       <p className="audio-player__description">{recording.description}</p>
       {recording.attribution || recording.rights ? <div className="audio-player__credit">{recording.attribution ? <span>{recording.attribution}</span> : null}{recording.rights ? <small>{recording.rights}</small> : null}</div> : null}
+      <ClientSaveButton type="audio" id={recording.id} />
 
       {recording.src ? (
         <>

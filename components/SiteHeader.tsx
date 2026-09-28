@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "../lib/site";
+import { AccountControl } from "./AccountControl";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -8,10 +9,11 @@ const navItems = [
   { href: "/practice", label: "Practice" },
   { href: "/places", label: "Sacred Places" },
   { href: "/guide", label: "Guide" },
+  { href: "/community", label: "Community" },
   { href: "/about", label: "About" },
 ];
 
-export function SiteHeader() {
+export async function SiteHeader() {
   return (
     <header className="site-header">
       <div className="site-header__inner">
@@ -25,6 +27,7 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+          <AccountControl />
         </nav>
       </div>
     </header>

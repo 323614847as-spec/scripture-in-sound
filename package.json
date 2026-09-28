@@ -9,8 +9,10 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.2",
     "@vercel/analytics": "latest",
-    "next": "latest",
+    "next": "^16.3.6",
     "react": "latest",
     "react-dom": "latest"
   },

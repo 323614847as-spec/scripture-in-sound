@@ -13,6 +13,9 @@ export function SiteFooter() {
         <div className="site-footer__links" aria-label="Footer navigation">
           <Link href="/about">About & editorial approach</Link>
           <Link href="/sources-ethics">Sources & ethics</Link>
+          <Link href="/community/guidelines">Community guidelines</Link>
+          <Link href="/impact">Impact</Link>
+          <Link href="/privacy">Privacy</Link>
           <Link href="/sitemap.xml">Sitemap</Link>
         </div>
       </div>

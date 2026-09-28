@@ -1,0 +1,6 @@
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { DiscussionCard } from "../../../components/DiscussionCard";
+import { createClient, getCurrentUser } from "../../../lib/supabase/server";
+
+export default async function MyDiscussionsPage() { const user = await getCurrentUser(); if (!user) redirect("/sign-in?next=/profile/discussions"); const supabase = await createClient(); const { data: profileId } = supabase ? await supabase.rpc("current_profile_id") : { data: null }; const { data } = supabase && profileId ? await supabase.from("discussions").select("*, profiles!discussions_author_id_fkey(username,display_name,avatar_url), replies(count)").eq("author_id", profileId).order("updated_at", { ascending: false }) : { data: [] }; const discussions = (data || []).map((item: any) => ({ ...item, reply_count: item.replies?.[0]?.count || 0 })); return <main id="main-content" className="page-shell profile-list"><Link className="back-link" href="/profile">← Profile</Link><p className="eyebrow">Account</p><h1>My Discussions</h1>{discussions.length ? discussions.map((item: any) => <DiscussionCard key={item.id} discussion={item} />) : <div className="community-empty"><h2>You have not started a discussion yet.</h2><Link className="text-link" href="/community/new">Start one →</Link></div>}</main>; }
