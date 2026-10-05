@@ -1,46 +1,94 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import type { Map as LeafletMap } from "leaflet";
 import type { Place } from "../types/content";
 
+function escapeHtml(value: string) {
+  return value.replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character] || character);
+}
+
 export function PlacesMap({ places }: { places: Place[] }) {
+  const mapNode = useRef<HTMLDivElement>(null);
+  const mapInstance = useRef<LeafletMap | null>(null);
   const [activeId, setActiveId] = useState(places[0]?.id);
   const activePlace = places.find((place) => place.id === activeId) || places[0];
 
+  useEffect(() => {
+    let cancelled = false;
+
+    async function mountMap() {
+      if (!mapNode.current || mapInstance.current) return;
+      const L = await import("leaflet");
+      if (cancelled || !mapNode.current) return;
+
+      const map = L.map(mapNode.current, {
+        center: [39.95, 116.28],
+        zoom: 9,
+        minZoom: 7,
+        scrollWheelZoom: false,
+        zoomControl: true,
+        attributionControl: true,
+      });
+      mapInstance.current = map;
+
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+      }).addTo(map);
+
+      places.forEach((place, index) => {
+        if (!place.coordinates?.verified) return;
+        const marker = L.marker([place.coordinates.latitude, place.coordinates.longitude], {
+          icon: L.divIcon({
+            className: "temple-map-marker",
+            html: `<span>${String(index + 1).padStart(2, "0")}</span>`,
+            iconSize: [34, 34],
+            iconAnchor: [17, 17],
+            popupAnchor: [0, -20],
+          }),
+          title: place.name,
+        }).addTo(map);
+
+        const period = place.historicalPeriod ? `<p>${escapeHtml(place.historicalPeriod)}</p>` : "";
+        marker.bindPopup(`
+          <article class="map-popup">
+            <p class="map-popup__local">${escapeHtml(place.nameChinese || place.localName || "")}</p>
+            <h3>${escapeHtml(place.nameEnglish || place.name)}</h3>
+            <small>${escapeHtml(place.traditions.join(" · "))}</small>
+            ${period}
+            <p>${escapeHtml(place.shortDescription)}</p>
+            <a href="/places/${encodeURIComponent(place.slug)}">Open the place record →</a>
+          </article>
+        `);
+        marker.on("click", () => setActiveId(place.id));
+      });
+
+      window.setTimeout(() => map.invalidateSize(), 0);
+    }
+
+    void mountMap();
+    return () => {
+      cancelled = true;
+      mapInstance.current?.remove();
+      mapInstance.current = null;
+    };
+  }, [places]);
+
   return (
-    <div className="map-shell">
-      <div className="map-canvas" aria-label="Interactive schematic map of featured places">
-        <div className="map-canvas__grid" aria-hidden="true" />
-        <div className="map-canvas__land" aria-hidden="true">
-          <span>CHINA</span>
-        </div>
-        {places.map((place, index) => (
-          <button
-            key={place.id}
-            type="button"
-            className={`map-marker ${place.id === activePlace?.id ? "is-active" : ""}`}
-            style={{ left: `${place.mapPosition.x}%`, top: `${place.mapPosition.y}%` }}
-            onClick={() => setActiveId(place.id)}
-            aria-label={`Show ${place.name}`}
-            aria-pressed={place.id === activePlace?.id}
-          >
-            <span>{String(index + 1).padStart(2, "0")}</span>
-          </button>
-        ))}
-        <p className="map-canvas__notice">
-          Schematic display only · verified geographic coordinates forthcoming
-        </p>
-      </div>
+    <div className="map-shell map-shell--leaflet">
+      <div ref={mapNode} className="leaflet-map" aria-label="Interactive OpenStreetMap of Buddhist sites in Beijing" />
       {activePlace ? (
         <aside className="map-preview" aria-live="polite">
-          {activePlace.coverImage ? <img className="map-preview__image" src={activePlace.coverImage.src} alt={activePlace.coverImage.alt} /> : <div className="image-placeholder image-placeholder--map"><span>[COVER PHOTOGRAPH TO BE ADDED BY AUTHOR]</span></div>}
           <p className="eyebrow">{activePlace.location}</p>
-          <h3>{activePlace.name}</h3>
-          <p className="map-preview__local">{activePlace.localName}</p>
-          <p>{activePlace.shortDescription}</p>
+          <h3>{activePlace.nameEnglish || activePlace.name}</h3>
+          <p className="map-preview__local">{activePlace.nameChinese || activePlace.localName}</p>
+          {activePlace.romanization ? <p className="map-preview__romanization">{activePlace.romanization}</p> : null}
+          <p>{activePlace.summary || activePlace.shortDescription}</p>
           <div className="map-preview__footer">
             <span>{activePlace.traditions.join(" · ")}</span>
+            <span>{activePlace.historicalPeriod}</span>
             <Link className="text-link" href={`/places/${activePlace.slug}`}>Explore this place →</Link>
           </div>
         </aside>

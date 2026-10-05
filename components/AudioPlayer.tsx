@@ -27,15 +27,20 @@ export function AudioPlayer({ recording }: { recording: AudioRecording }) {
     if (!audio) return;
     audio.volume = volume;
     audio.playbackRate = speed;
+    if (Number.isFinite(audio.duration)) setDuration(audio.duration);
   }, [volume, speed]);
 
   async function togglePlay() {
     const audio = audioRef.current;
     if (!audio || !recording.src) return;
     if (audio.paused) {
-      await audio.play();
-      if (audio.currentTime < 0.25) recordImpactEvent("audio_play", recording.id);
       setPlaying(true);
+      try {
+        await audio.play();
+        if (audio.currentTime < 0.25) recordImpactEvent("audio_play", recording.id);
+      } catch {
+        setPlaying(false);
+      }
     } else {
       audio.pause();
       setPlaying(false);
@@ -59,6 +64,7 @@ export function AudioPlayer({ recording }: { recording: AudioRecording }) {
 
       <p className="audio-player__description">{recording.description}</p>
       {recording.attribution || recording.rights ? <div className="audio-player__credit">{recording.attribution ? <span>{recording.attribution}</span> : null}{recording.rights ? <small>{recording.rights}</small> : null}</div> : null}
+      {recording.sourceUrl || recording.licenseUrl ? <div className="audio-player__links">{recording.sourceUrl ? <a href={recording.sourceUrl} target="_blank" rel="noreferrer">Source record ↗</a> : null}{recording.licenseUrl ? <a href={recording.licenseUrl} target="_blank" rel="noreferrer">License ↗</a> : null}</div> : null}
       <ClientSaveButton type="audio" id={recording.id} />
 
       {recording.src ? (
