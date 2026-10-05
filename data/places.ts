@@ -17,7 +17,12 @@ function osmSource(name: string, latitude: number, longitude: number): Source {
 const officialSources = {
   yonghe: { id: "beijing-religion-yonghe", title: "雍和宫", author: "北京市民族宗教事务委员会", url: "https://mzzjw.beijing.gov.cn/bjmz/201912/t20191215_1235552.html", accessDate: reviewedOn },
   fayuan: { id: "beijing-fayuan", title: "法源寺", author: "北京市人民政府", url: "https://www.beijing.gov.cn/renwen/rwzyd/qgzdwwbhdw/fys/202210/t20221028_2846902.html", accessDate: reviewedOn },
+  guangji: { id: "beijing-guangji", title: "广济寺", author: "中共北京市委统一战线工作部", url: "https://www.bjtzb.gov.cn/wwwroot/sdtyzx/publish/article/55/12290.shtml", accessDate: reviewedOn },
+  tanzhe: { id: "beijing-tanzhe", title: "潭柘寺", author: "北京市人民政府", url: "https://www.beijing.gov.cn/gate/big5/www.beijing.gov.cn/renwen/bjgk/mtggk/mtgwl/202304/t20230410_2994438.html", accessDate: reviewedOn },
   jietai: { id: "beijing-jietai", title: "戒台寺", author: "北京市人民政府", url: "https://www.beijing.gov.cn/renwen/rwzyd/lyjq/4A/jts/202210/t20221018_2838543.html", accessDate: reviewedOn },
+  dajue: { id: "beijing-dajue", title: "北京西山大觉寺的创立与旸台山", author: "北京市文物局", url: "https://wwj.beijing.gov.cn/bjww/wwjzzcslm/1731063/1731066/djs/1731072/1731190/index.html", accessDate: reviewedOn },
+  wofo: { id: "beijing-wofo", title: "西山著名的古老寺院：卧佛寺", author: "北京市公园管理中心", url: "https://gygl.beijing.gov.cn/whgy/whgy_wsgc/201912/t20191206_885741.html", accessDate: reviewedOn },
+  biyun: { id: "beijing-biyun", title: "碧云寺", author: "北京市公园管理中心", url: "https://gygl.beijing.gov.cn/mlgy/mlgy_gyjg01/201912/t20191211_1048664.html", accessDate: reviewedOn },
   hongluo: { id: "beijing-hongluo", title: "Hongluo Temple", author: "The People's Government of Beijing Municipality", url: "https://english.beijing.gov.cn/beijinginfo/facts/religion/202008/t20200831_1993652.html", accessDate: reviewedOn },
   yunju: { id: "beijing-yunju", title: "房山云居寺与明清皇室", author: "北京市文物局", url: "https://wwj.beijing.gov.cn/bjww/362760/362770/325924541/", accessDate: reviewedOn },
 } satisfies Record<string, Source>;
@@ -63,13 +68,13 @@ export const places: Place[] = [
   }),
   beijingPlace({
     id: "guangji-si", slug: "guangji-si", name: "Guangji Temple", localName: "广济寺", nameChinese: "广济寺", nameEnglish: "Guangji Temple", romanization: "Guǎngjì Sì",
-    traditions: ["Chinese Buddhism", "Mahāyāna"], historicalPeriod: "Ming and Qing rebuilding of an earlier temple site",
+    traditions: ["Chinese Buddhism", "Mahāyāna"], historicalPeriod: "Founded in the Jin-period tradition; rebuilt and named Hongci Guangji Temple in 1466",
     shortDescription: "A central Beijing monastery associated with the Buddhist Association of China.",
     summary: "An active urban temple whose modern institutional role is as significant as its historic architecture.",
     description: "This record limits its public historical claim to the site's established Ming–Qing fabric and modern institutional role; fuller chronology awaits source review.",
     historicalBackground: "The present record is intentionally concise. Future research should distinguish the earlier temple tradition from securely dated rebuilding phases and document the site's twentieth-century institutional history.",
     coordinates: { latitude: 39.92345, longitude: 116.36617, verified: true, sourceUrl: "https://www.openstreetmap.org/way/233219116", reviewedOn },
-    relatedScriptureIds: [], relatedPracticeIds: [], sources: [osmSource("Guangji Temple", 39.92345, 116.36617)],
+    relatedScriptureIds: [], relatedPracticeIds: [], sources: [officialSources.guangji, osmSource("Guangji Temple", 39.92345, 116.36617)],
   }),
   beijingPlace({
     id: "tanzhe-si", slug: "tanzhe-si", name: "Tanzhe Temple", localName: "潭柘寺", nameChinese: "潭柘寺", nameEnglish: "Tanzhe Temple", romanization: "Tánzhè Sì",
@@ -79,7 +84,7 @@ export const places: Place[] = [
     description: "The site is included for its continuous importance in Beijing's Buddhist geography. Precise foundation narratives vary, so this record separates traditional dating from extant architectural evidence.",
     historicalBackground: "Tanzhe Temple is conventionally associated with an early fourth-century foundation, while much of what visitors encounter reflects later rebuilding. Future research will add a phase-by-phase architectural history from specialist sources.",
     coordinates: { latitude: 39.904016, longitude: 116.024133, verified: true, sourceUrl: "https://www.openstreetmap.org/?mlat=39.904016&mlon=116.024133#map=17/39.904016/116.024133", reviewedOn },
-    relatedScriptureIds: [], relatedPracticeIds: [], sources: [osmSource("Tanzhe Temple", 39.904016, 116.024133)], featured: true,
+    relatedScriptureIds: [], relatedPracticeIds: [], sources: [officialSources.tanzhe, osmSource("Tanzhe Temple", 39.904016, 116.024133)], featured: true,
   }),
   beijingPlace({
     id: "jietai-si", slug: "jietai-si", name: "Jietai Temple", localName: "戒台寺", nameChinese: "戒台寺", nameEnglish: "Jietai Temple", romanization: "Jiètái Sì",
@@ -93,13 +98,13 @@ export const places: Place[] = [
   }),
   beijingPlace({
     id: "dajue-si", slug: "dajue-si", name: "Dajue Temple", localName: "大觉寺", nameChinese: "大觉寺", nameEnglish: "Dajue Temple", romanization: "Dàjué Sì",
-    traditions: ["Chinese Buddhism", "Mahāyāna"], historicalPeriod: "Liao origins; later Ming and Qing rebuilding",
+    traditions: ["Chinese Buddhism", "Mahāyāna"], historicalPeriod: "Liao-period evidence includes a 1068 inscription; later Ming and Qing rebuilding",
     shortDescription: "A western Beijing mountain temple noted for historic halls, trees, and layered rebuilding.",
     summary: "A temple landscape where architecture, springs, and old trees frame the study of Buddhist place-making.",
     description: "The record uses a cautious period label because the complex contains fabric and memories from several dynastic phases rather than a single unchanged foundation moment.",
     historicalBackground: "Dajue Temple is generally connected with Liao-period origins and substantial later reconstruction. A fuller chronology and object history remain a research task for this archive.",
     coordinates: { latitude: 40.051306, longitude: 116.099528, verified: true, sourceUrl: "https://www.openstreetmap.org/?mlat=40.051306&mlon=116.099528#map=17/40.051306/116.099528", reviewedOn },
-    relatedScriptureIds: [], relatedPracticeIds: [], sources: [osmSource("Dajue Temple", 40.051306, 116.099528)],
+    relatedScriptureIds: [], relatedPracticeIds: [], sources: [officialSources.dajue, osmSource("Dajue Temple", 40.051306, 116.099528)],
   }),
   beijingPlace({
     id: "wofo-si", slug: "wofo-si", name: "Wofo Temple", localName: "卧佛寺", nameChinese: "卧佛寺", nameEnglish: "Temple of the Reclining Buddha", romanization: "Wòfó Sì",
@@ -109,7 +114,7 @@ export const places: Place[] = [
     description: "The temple is treated here as both an active Buddhist heritage site and a place where an image gives the complex its familiar name.",
     historicalBackground: "The temple's long history includes repeated rebuilding. This entry records only the broad period sequence until object-level and architectural sources are added.",
     coordinates: { latitude: 40.0053, longitude: 116.201, verified: true, sourceUrl: "https://www.openstreetmap.org/?mlat=40.0053&mlon=116.201#map=17/40.0053/116.201", reviewedOn },
-    relatedScriptureIds: [], relatedPracticeIds: [], sources: [osmSource("Wofo Temple", 40.0053, 116.201)],
+    relatedScriptureIds: [], relatedPracticeIds: [], sources: [officialSources.wofo, osmSource("Wofo Temple", 40.0053, 116.201)],
   }),
   beijingPlace({
     id: "biyun-si", slug: "biyun-si", name: "Biyun Temple", localName: "碧云寺", nameChinese: "碧云寺", nameEnglish: "Biyun Temple", romanization: "Bìyún Sì",
@@ -119,7 +124,7 @@ export const places: Place[] = [
     description: "The page presents a broad chronology and leaves detailed claims about individual halls and patrons for future specialist verification.",
     historicalBackground: "Biyun Temple is generally associated with a Yuan-period origin and substantial Ming and Qing expansion. Its spatial sequence and later memorial uses require careful separation in a future full entry.",
     coordinates: { latitude: 39.9958, longitude: 116.1853, verified: true, sourceUrl: "https://www.openstreetmap.org/?mlat=39.9958&mlon=116.1853#map=17/39.9958/116.1853", reviewedOn },
-    relatedScriptureIds: [], relatedPracticeIds: [], sources: [osmSource("Biyun Temple", 39.9958, 116.1853)],
+    relatedScriptureIds: [], relatedPracticeIds: [], sources: [officialSources.biyun, osmSource("Biyun Temple", 39.9958, 116.1853)],
   }),
   beijingPlace({
     id: "hongluo-si", slug: "hongluo-si", name: "Hongluo Temple", localName: "红螺寺", nameChinese: "红螺寺", nameEnglish: "Hongluo Temple", romanization: "Hóngluó Sì",
