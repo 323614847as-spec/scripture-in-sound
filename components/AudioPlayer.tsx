@@ -56,6 +56,7 @@ export function AudioPlayer({ recording }: { recording: AudioRecording }) {
             <span aria-hidden="true">·</span>
             <span>{recording.language}</span>
             {recording.traditions?.length ? <><span aria-hidden="true">·</span><span>{recording.traditions.join(" / ")}</span></> : null}
+            {recording.durationLabel ? <><span aria-hidden="true">·</span><span>{recording.durationLabel}</span></> : null}
           </div>
           <h3>{recording.title}</h3>
         </div>

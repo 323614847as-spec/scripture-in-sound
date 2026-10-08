@@ -6,7 +6,7 @@ import type { Scripture, TeachingMode, TextType } from "../types/content";
 import { StatusLabel } from "./StatusLabel";
 
 const options = {
-  tradition: ["Theravāda", "Mahāyāna", "Vajrayāna"],
+  tradition: ["Early Buddhism", "Theravāda", "Mahāyāna", "Tibetan Buddhism", "Vajrayāna"],
   textType: ["sutra", "sutta", "tantra", "mantra", "dharani", "commentary", "liturgy"],
   theme: ["Compassion", "Emptiness", "Wisdom", "Impermanence", "Mindfulness", "Pure Land", "Bodhisattva Practice"],
   language: ["Sanskrit", "Pāli", "Classical Chinese", "Tibetan", "English"],
@@ -50,7 +50,7 @@ export function ScriptureArchive({ scriptures }: { scriptures: Scripture[] }) {
       {filtersOpen ? (
         <div className="filter-drawer" id="scripture-filters">
           {Object.entries(options).map(([group, values]) => (
-            <fieldset key={group}><legend>{group === "textType" ? "Text type" : group === "teachingMode" ? "Teaching context" : group}</legend>{values.map((value) => <label key={value}><input type="checkbox" checked={selected[group].includes(value)} onChange={() => toggle(group, value)} /><span>{group === "textType" ? textTypeLabel[value as TextType] : value === "exoteric" ? "Exoteric" : value === "esoteric" ? "Esoteric" : value}</span></label>)}</fieldset>
+            <fieldset key={group}><legend>{group === "textType" ? "Category" : group === "teachingMode" ? "Teaching context" : group}</legend>{values.map((value) => <label key={value}><input type="checkbox" checked={selected[group].includes(value)} onChange={() => toggle(group, value)} /><span>{group === "textType" ? textTypeLabel[value as TextType] : value === "exoteric" ? "Exoteric" : value === "esoteric" ? "Esoteric" : value}</span></label>)}</fieldset>
           ))}
           <p className="filter-context">Teaching context is used only where historically appropriate. It is not assigned automatically from tradition.</p>
         </div>

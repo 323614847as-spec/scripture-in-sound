@@ -26,6 +26,9 @@ export interface Photograph {
   note?: string;
   credit: string;
   rights?: string;
+  sourceType: "external" | "original-fieldwork";
+  sourceUrl?: string;
+  licenseUrl?: string;
   status: ContentStatus;
 }
 
@@ -76,6 +79,9 @@ export interface Scripture {
   selectedPassage?: string;
   originalLanguageText?: string;
   englishTranslation?: string;
+  translator?: string;
+  originalTextRights?: string;
+  translationRights?: string;
   pronunciation?: string;
   howToListen?: string[];
   sources: Source[];

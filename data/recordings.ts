@@ -10,6 +10,31 @@ function verifiedSource(id: string) {
 const heartSutra = verifiedSource("commons-heart-sutra-mandarin");
 const lingyin = verifiedSource("commons-lingyin-chanting");
 const refuges = verifiedSource("commons-three-refuges");
+const patimokkha = verifiedSource("commons-patimokkha-pali");
+const japaneseHeartSutra = verifiedSource("commons-heart-sutra-japanese");
+const shurangama = verifiedSource("commons-shurangama-dharani");
+const sitatapatra = verifiedSource("commons-sitatapatra-dharani");
+const mahaPiritha = verifiedSource("commons-maha-piritha");
+const omMani = verifiedSource("commons-om-mani-dingjue");
+
+function commonsRecording(
+  source: ReturnType<typeof verifiedSource>,
+  details: Pick<AudioRecording, "id" | "slug" | "language" | "traditions" | "type" | "description" | "relatedScriptureIds">,
+): AudioRecording {
+  return {
+    ...details,
+    title: source.title,
+    durationLabel: source.durationLabel,
+    src: source.directMediaUrl,
+    attribution: `${source.creator}; ${source.platform}${source.recordingDate ? ` · ${source.recordingDate}` : ""}`,
+    rights: `${source.license} · streamed from the unmodified Commons source`,
+    sourceUrl: source.sourceUrl,
+    licenseUrl: source.licenseUrl,
+    permissions: source.permissions,
+    source: { id: source.id, title: source.title, author: source.creator, publication: source.platform, url: source.sourceUrl, rights: source.license },
+    status: "published",
+  };
+}
 
 export const recordings: AudioRecording[] = [
   {
@@ -21,6 +46,42 @@ export const recordings: AudioRecording[] = [
     source: { id: heartSutra.id, title: heartSutra.title, author: heartSutra.creator, publication: heartSutra.platform, url: heartSutra.sourceUrl, rights: heartSutra.license },
     status: "published", relatedScriptureIds: ["heart-sutra"],
   },
+  commonsRecording(japaneseHeartSutra, {
+    id: "heart-sutra-japanese", slug: "heart-sutra-japanese", language: "Japanese liturgical recitation",
+    traditions: ["Japanese Buddhism", "Mahāyāna"], type: "Scripture Recitation",
+    description: "Head Priest Yodo Sasaki and members of Kegon-in in Sōja recite the Heart Sutra. The archive presents this as a documented local performance, not a universal pronunciation model.",
+    relatedScriptureIds: ["heart-sutra"],
+  }),
+  commonsRecording(patimokkha, {
+    id: "patimokkha-pali", slug: "patimokkha-pali", language: "Pāli",
+    traditions: ["Theravāda", "Early Buddhism"], type: "Chanting",
+    description: "Monks chant the Pāṭimokkha during an Uposatha observance at Wat Khung Taphao in Uttaradit, Thailand. The complete recording runs over thirty-four minutes.",
+    relatedScriptureIds: [],
+  }),
+  commonsRecording(shurangama, {
+    id: "shurangama-dharani", slug: "shurangama-dharani", language: "Sanskrit / Siddham liturgical chant",
+    traditions: ["Chinese Buddhism", "Mahāyāna"], type: "Mantra",
+    description: "A thirty-second excerpt from Venerable Chan Master Hsuan Hua's recording of the Śūraṅgama dhāraṇī. The Commons source documents the excerpt and its license lineage.",
+    relatedScriptureIds: [],
+  }),
+  commonsRecording(sitatapatra, {
+    id: "sitatapatra-dharani", slug: "sitatapatra-dharani", language: "Sanskrit / Siddham liturgical chant",
+    traditions: ["Chinese Buddhism", "Mahāyāna"], type: "Mantra",
+    description: "A documented excerpt of the Uṣṇīṣa Sitātapatrā dhāraṇī chanted by Venerable Chan Master Hsuan Hua. No attempt is made here to standardize the source's transliteration.",
+    relatedScriptureIds: [],
+  }),
+  commonsRecording(mahaPiritha, {
+    id: "maha-piritha", slug: "maha-piritha", language: "Pāli",
+    traditions: ["Theravāda"], type: "Chanting",
+    description: "A complete, exceptionally long Mahā Piritha protective-chant recording. It is streamed from Wikimedia Commons; listeners should expect a large file and a multi-hour performance.",
+    relatedScriptureIds: [],
+  }),
+  commonsRecording(omMani, {
+    id: "om-mani-dingjue", slug: "om-mani-dingjue", language: "Sanskrit mantra in a Chinese Buddhist setting",
+    traditions: ["Chinese Buddhism", "Mahāyāna"], type: "Field Recording",
+    description: "A brief field recording of Oṃ maṇi padme hūṃ being played at Dingjue Temple in Changhua, Taiwan. It documents a place and moment rather than a studio performance.",
+    relatedScriptureIds: [],
+  }),
   {
     id: "lingyin-chanting", slug: "lingyin-chanting", title: lingyin.title,
     language: "Liturgical language not identified by source", traditions: ["Chinese Buddhism", "Mahāyāna"], type: "Field Recording", durationLabel: "1:03", src: lingyin.directMediaUrl,

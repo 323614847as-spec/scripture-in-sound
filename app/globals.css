@@ -181,9 +181,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .filter-context { grid-column: 1 / -1; margin: 0; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .7rem; }
 .empty-state { padding: 4rem 1rem; border-bottom: 1px solid var(--line); text-align: center; }
 .empty-state h2 { font-family: Georgia, "Times New Roman", serif; font-size: 1.8rem; font-weight: 400; }
-.archive-tools { display: grid; grid-template-columns: minmax(250px, .7fr) 1.3fr; gap: 2rem; align-items: end; margin-bottom: 2rem; }
+.archive-tools { display: grid; grid-template-columns: minmax(250px, .7fr) minmax(280px, .8fr) 1.3fr; gap: 1.2rem; align-items: end; margin-bottom: 2rem; }
 .archive-search { display: grid; gap: .45rem; color: var(--ink-soft); font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
 .archive-search input { width: 100%; padding: .8rem; border: 1px solid var(--line-dark); border-radius: 0; background: transparent; color: var(--ink); }
+.archive-selects { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
+.archive-selects label { display: grid; gap: .45rem; color: var(--ink-soft); font-size: .68rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.archive-selects select { min-width: 0; padding: .78rem; border: 1px solid var(--line-dark); border-radius: 0; background: transparent; color: var(--ink); }
 .category-filter { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 0; }
 .category-filter button { padding: .55rem .8rem; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; font-size: .7rem; }
 .category-filter button:hover, .category-filter button.is-active { border-color: var(--ink); background: var(--ink); color: white; }
@@ -277,6 +280,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .photo-gallery button { width: 100%; padding: 0; border: 0; background: var(--mist); cursor: zoom-in; }
 .photo-gallery img { width: 100%; max-height: 520px; display: block; object-fit: contain; }
 .photo-gallery figcaption { display: flex; flex-direction: column; padding: .6rem 0 1rem; color: var(--muted); font-size: .72rem; }
+.photo-gallery figcaption a, .lightbox figcaption a { color: inherit; text-decoration: underline; text-underline-offset: .2em; }
 .gallery-empty { padding: 3rem 1.5rem; border: 1px solid var(--line); background: var(--paper); text-align: center; }
 .gallery-empty strong { color: var(--oxide); font-size: .74rem; letter-spacing: .05em; }
 .gallery-empty p { font-size: .78rem; }
@@ -519,6 +523,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .practice-room { gap: 2rem; }
   .practice-card { grid-template-columns: 75px 1fr; }
   .archive-tools, .practice-library-tools { grid-template-columns: 1fr; align-items: stretch; }
+  .archive-selects { grid-template-columns: 1fr; }
   .duration-filter select { width: 100%; }
   .archive-count, .ethics-ledger { align-items: flex-start; flex-direction: column; gap: .5rem; }
   .ethics-ledger div { justify-content: flex-start; }

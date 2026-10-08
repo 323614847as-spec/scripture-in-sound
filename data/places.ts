@@ -1,4 +1,4 @@
-import type { Place, Source } from "../types/content";
+import type { Photograph, Place, Source } from "../types/content";
 
 const reviewedOn = "2026-10-05";
 
@@ -27,16 +27,48 @@ const officialSources = {
   yunju: { id: "beijing-yunju", title: "房山云居寺与明清皇室", author: "北京市文物局", url: "https://wwj.beijing.gov.cn/bjww/362760/362770/325924541/", accessDate: reviewedOn },
 } satisfies Record<string, Source>;
 
+function commonsPhoto(id: string, filename: string, alt: string, caption: string, credit: string, date: string, rights: string, licenseUrl: string): Photograph {
+  return {
+    id,
+    src: `https://commons.wikimedia.org/wiki/Special:Redirect/file/${encodeURIComponent(filename)}`,
+    alt,
+    caption,
+    date,
+    location: "Beijing, China",
+    credit,
+    rights,
+    sourceType: "external",
+    sourceUrl: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(filename)}`,
+    licenseUrl,
+    status: "published",
+  };
+}
+
+const placePhotos: Record<string, Photograph[]> = {
+  "yonghe-gong": [commonsPhoto("yonghe-commons-01", "Yong_He_Temple_Beijing_01.jpg", "A courtyard and temple hall at Yonghe Temple in Beijing", "Yonghe Temple courtyard and hall.", "Jacob Ehnmark", "27 December 2004", "CC BY 2.0 · unmodified external image", "https://creativecommons.org/licenses/by/2.0/")],
+  "fayuan-si": [commonsPhoto("fayuan-commons-01", "Fayuan_Temple1.JPG", "Historic buildings inside Fayuan Temple in Beijing", "Fayuan Temple complex.", "Walter Grassroot", "9 June 2008", "CC BY-SA 3.0 · unmodified external image", "https://creativecommons.org/licenses/by-sa/3.0/")],
+  "guangji-si": [commonsPhoto("guangji-commons-01", "北京广济寺大雄殿2021.jpg", "The Mahāvīra Hall at Guangji Temple in Beijing", "The main Mahāvīra Hall at Guangji Temple.", "ScareCriterion12", "12 June 2021", "CC BY-SA 4.0 · unmodified external image", "https://creativecommons.org/licenses/by-sa/4.0/")],
+  "tanzhe-si": [commonsPhoto("tanzhe-commons-01", "Tanzhetemplepic3.jpg", "A temple hall at Tanzhe Temple in western Beijing", "A hall within Tanzhe Temple.", "Cygnus78", "24 August 2007", "CC BY-SA 2.0 · unmodified external image", "https://creativecommons.org/licenses/by-sa/2.0/")],
+  "jietai-si": [commonsPhoto("jietai-commons-01", "Entrance_to_Jietai_Temple_(20150117133227).JPG", "The Shanmen entrance hall at Jietai Temple", "Shanmen Hall at Jietai Temple.", "N509FZ", "17 January 2015", "CC BY-SA 4.0 · unmodified external image", "https://creativecommons.org/licenses/by-sa/4.0/")],
+  "dajue-si": [commonsPhoto("dajue-commons-01", "Gate_of_Dajue_Temple_(20260521164759).jpg", "The entrance gate of Dajue Temple in the Beijing hills", "The gate of Dajue Temple.", "N509FZ", "21 May 2026", "CC BY-SA 4.0 · unmodified external image", "https://creativecommons.org/licenses/by-sa/4.0/")],
+  "wofo-si": [commonsPhoto("wofo-commons-01", "北京卧佛寺牌坊2023.3.jpg", "The ceremonial archway at Wofo Temple in Beijing", "The archway at Wofo Temple in the National Botanical Garden.", "ScareCriterion12", "19 March 2023", "CC BY-SA 4.0 · unmodified external image", "https://creativecommons.org/licenses/by-sa/4.0/")],
+  "biyun-si": [commonsPhoto("biyun-commons-01", "碧云寺_香山.jpg", "Biyun Temple at Fragrant Hills in Beijing", "Biyun Temple on Fragrant Hills.", "Charlie fong / 冯成", "January 2009", "Public domain dedication · unmodified external image", "https://creativecommons.org/publicdomain/mark/1.0/")],
+  "hongluo-si": [commonsPhoto("hongluo-commons-01", "红螺寺大门_-_Entrance_of_Hongluo_Temple_-_2012.04_-_panoramio.jpg", "The entrance gate of Hongluo Temple in Beijing", "Entrance to Hongluo Temple.", "rheins", "7 April 2012", "CC BY 3.0 · unmodified external image", "https://creativecommons.org/licenses/by/3.0/")],
+  "yunju-si": [commonsPhoto("yunju-commons-01", "Entrance_to_Yunju_Temple_(20150223134448).JPG", "The entrance to Yunju Temple in Fangshan, Beijing", "Entrance to Yunju Temple.", "N509FZ", "23 February 2015", "CC BY-SA 4.0 · unmodified external image", "https://creativecommons.org/licenses/by-sa/4.0/")],
+};
+
 type PlaceSeed = Omit<Place, "country" | "region" | "city" | "location" | "photographs" | "fieldNoteIds" | "fieldRecordingIds" | "mapPosition" | "status">;
 
 function beijingPlace(seed: PlaceSeed): Place {
+  const photographs = placePhotos[seed.id] || [];
   return {
     ...seed,
     city: "Beijing",
     region: "Beijing Municipality",
     country: "China",
     location: "Beijing, China",
-    photographs: [],
+    photographs,
+    coverImage: photographs[0],
     fieldNoteIds: seed.id === "yonghe-gong" ? ["incense-visitors-yonghe"] : [],
     fieldRecordingIds: [],
     mapPosition: { x: 50, y: 50 },
